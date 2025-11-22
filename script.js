@@ -19,6 +19,22 @@ function base64UrlDecode(str) {
     }
 }
 
+// Function to decode Base64URL to ArrayBuffer (for binary data like signatures)
+function base64UrlDecodeToArrayBuffer(str) {
+    // Replace URL-safe characters and add padding
+    str = str.replace(/-/g, '+').replace(/_/g, '/');
+    const paddingLength = (4 - (str.length % 4)) % 4;
+    str += '='.repeat(paddingLength);
+    
+    // Decode to binary string
+    const binary = atob(str);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+    return bytes;
+}
+
 // Function to parse PEM format public key
 function pemToArrayBuffer(pem) {
     // Remove PEM header/footer and newlines
@@ -67,6 +83,7 @@ async function verifySignature(token, secret) {
             'HS512': { name: 'HMAC', hash: 'SHA-512' },
             'ES256': { name: 'ECDSA', hash: 'SHA-256', namedCurve: 'P-256' },
             'ES384': { name: 'ECDSA', hash: 'SHA-384', namedCurve: 'P-384' },
+            // ES512 uses P-521 curve (521-bit), not P-512 (which doesn't exist in the standard)
             'ES512': { name: 'ECDSA', hash: 'SHA-512', namedCurve: 'P-521' }
         };
 
@@ -154,15 +171,8 @@ async function verifySignature(token, secret) {
                 }
             }
 
-            // Decode the signature from base64url
-            const signatureB64 = parts[2].replace(/-/g, '+').replace(/_/g, '/');
-            const paddingLength = (4 - (signatureB64.length % 4)) % 4;
-            const paddedSignature = signatureB64 + '='.repeat(paddingLength);
-            const signatureBinary = atob(paddedSignature);
-            const signatureBytes = new Uint8Array(signatureBinary.length);
-            for (let i = 0; i < signatureBinary.length; i++) {
-                signatureBytes[i] = signatureBinary.charCodeAt(i);
-            }
+            // Decode the signature from base64url to binary
+            const signatureBytes = base64UrlDecodeToArrayBuffer(parts[2]);
 
             // Verify the signature
             const isValid = await crypto.subtle.verify(
