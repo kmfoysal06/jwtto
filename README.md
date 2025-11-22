@@ -6,7 +6,8 @@ A simple, minimalist JWT (JSON Web Token) decoder with a clean black and white d
 
 - **Simple Design**: Clean black and white interface with no gradients, box shadows, or hover effects
 - **Real-time Decoding**: Automatically decodes JWT tokens as you type
-- **Local Processing**: All decoding happens in your browser - no data sent to servers
+- **Signature Verification**: Verify JWT signatures using HMAC (HS256/HS384/HS512) or ECDSA (ES256/ES384/ES512) algorithms
+- **Local Processing**: All decoding and verification happens in your browser - no data sent to servers
 - **Error Handling**: Clear error messages for invalid tokens
 - **Responsive Layout**: Works on desktop and mobile devices
 
@@ -40,7 +41,9 @@ A JWT token consists of three parts separated by dots (`.`):
 2. **Payload**: Contains the claims/data
 3. **Signature**: Used to verify the token's authenticity
 
-This decoder extracts and displays the header and payload. The signature is displayed but not verified (verification requires the secret key).
+This decoder extracts and displays the header and payload. The signature can be verified by providing:
+- **Secret key** for HMAC algorithms (HS256, HS384, HS512)
+- **Public key** in PEM or JWK format for ECDSA algorithms (ES256, ES384, ES512)
 
 ## Example JWT
 
