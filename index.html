@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Decoder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JWT Decoder</h1>
+            <p>Decode and inspect JSON Web Tokens</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <label for="jwt-input">Encoded JWT</label>
+                <textarea 
+                    id="jwt-input" 
+                    placeholder="Paste your JWT token here..."
+                    rows="8"
+                ></textarea>
+            </div>
+
+            <div class="output-section">
+                <div class="output-panel">
+                    <h2>Header</h2>
+                    <pre id="header-output"></pre>
+                </div>
+
+                <div class="output-panel">
+                    <h2>Payload</h2>
+                    <pre id="payload-output"></pre>
+                </div>
+
+                <div class="output-panel">
+                    <h2>Signature</h2>
+                    <pre id="signature-output"></pre>
+                </div>
+            </div>
+
+            <div class="error-message" id="error-message"></div>
+        </main>
+
+        <footer>
+            <p>Simple JWT Decoder - Decodes JWT tokens locally in your browser</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
