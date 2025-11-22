@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JWT Decoder</title>
+    <title>JWT Decoder - Decode and Verify JSON Web Tokens Online</title>
+    <meta name="description" content="Free online JWT decoder tool. Decode, inspect, and verify JWT tokens with signature validation. Secure, fast, and works entirely in your browser. No data sent to servers.">
+    <meta name="keywords" content="JWT decoder, JSON Web Token, JWT parser, decode JWT, verify JWT signature, JWT tool, HMAC verification">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,6 +13,12 @@
         <header>
             <h1>JWT Decoder</h1>
             <p>Decode and inspect JSON Web Tokens</p>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+            </nav>
         </header>
 
         <main>
@@ -21,6 +29,15 @@
                     placeholder="Paste your JWT token here..."
                     rows="8"
                 ></textarea>
+            </div>
+
+            <div class="input-section">
+                <label for="secret-input">Secret Key (Optional - for signature verification)</label>
+                <input 
+                    type="text"
+                    id="secret-input" 
+                    placeholder="Enter secret key to verify signature..."
+                />
             </div>
 
             <div class="output-section">
@@ -37,13 +54,69 @@
                 <div class="output-panel">
                     <h2>Signature</h2>
                     <pre id="signature-output"></pre>
+                    <div id="signature-status" class="signature-status"></div>
                 </div>
             </div>
 
             <div class="error-message" id="error-message"></div>
         </main>
 
+        <section class="guide-section">
+            <h2>How to Use JWT Decoder</h2>
+            
+            <div class="guide-content">
+                <div class="guide-step">
+                    <h3>Step 1: Paste Your JWT Token</h3>
+                    <p>Copy your JWT token from your application or API response and paste it into the "Encoded JWT" textarea above. The token will be automatically decoded as you type.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>Step 2: View Decoded Information</h3>
+                    <p>The decoder will instantly display three parts of your JWT:</p>
+                    <ul>
+                        <li><strong>Header:</strong> Contains metadata about the token, including the algorithm used (e.g., HS256, RS256) and token type.</li>
+                        <li><strong>Payload:</strong> Contains the claims or data stored in the token, such as user ID, expiration time, and custom fields.</li>
+                        <li><strong>Signature:</strong> The encoded signature used to verify the token's authenticity.</li>
+                    </ul>
+                </div>
+
+                <div class="guide-step">
+                    <h3>Step 3: Verify Signature (Optional)</h3>
+                    <p>To verify if your JWT signature is valid, enter the secret key in the "Secret Key" field. The decoder will:</p>
+                    <ul>
+                        <li>Show a <strong>green "Valid Signature"</strong> message if the signature matches</li>
+                        <li>Show a <strong>red "Invalid Signature"</strong> message with reason if the signature doesn't match</li>
+                        <li>Show an info message if the algorithm is not supported for verification</li>
+                    </ul>
+                    <p><em>Note: Currently supports HMAC algorithms (HS256, HS384, HS512). RSA and ECDSA verification coming soon.</em></p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>Security & Privacy</h3>
+                    <p>All JWT decoding and verification happens locally in your browser. No data is sent to any server, ensuring your tokens and secrets remain private and secure.</p>
+                </div>
+            </div>
+
+            <div class="guide-content">
+                <h3>What is a JWT?</h3>
+                <p>A JSON Web Token (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties. JWTs are commonly used for authentication and information exchange in web applications.</p>
+                
+                <h3>JWT Structure</h3>
+                <p>A JWT consists of three parts separated by dots (.):</p>
+                <ul>
+                    <li><strong>Header.Payload.Signature</strong></li>
+                </ul>
+                <p>Each part is Base64URL encoded, making it safe for use in URLs and HTTP headers.</p>
+            </div>
+        </section>
+
         <footer>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+            </nav>
             <p>Simple JWT Decoder - Decodes JWT tokens locally in your browser</p>
         </footer>
     </div>

@@ -52,7 +52,8 @@ label {
     margin-bottom: 10px;
 }
 
-textarea {
+textarea,
+input[type="text"] {
     width: 100%;
     padding: 15px;
     font-family: 'Courier New', monospace;
@@ -60,10 +61,14 @@ textarea {
     border: 2px solid #000000;
     background-color: #ffffff;
     color: #000000;
+}
+
+textarea {
     resize: vertical;
 }
 
-textarea:focus {
+textarea:focus,
+input[type="text"]:focus {
     outline: none;
     border: 2px solid #000000;
 }
@@ -111,12 +116,188 @@ pre {
     display: block;
 }
 
+.signature-status {
+    margin-top: 15px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    border: 2px solid #000000;
+    display: none;
+}
+
+.signature-status.valid {
+    display: block;
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #28a745;
+}
+
+.signature-status.invalid {
+    display: block;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #dc3545;
+}
+
+.signature-status.info {
+    display: block;
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #17a2b8;
+}
+
+.main-nav {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #000000;
+}
+
+.main-nav a {
+    color: #000000;
+    text-decoration: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #000000;
+    display: inline-block;
+    font-weight: 500;
+}
+
+.guide-section {
+    margin-top: 60px;
+    padding: 40px 0;
+    border-top: 2px solid #000000;
+}
+
+.guide-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.guide-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+.guide-content {
+    margin-bottom: 30px;
+}
+
+.guide-step {
+    margin-bottom: 30px;
+}
+
+.guide-step p,
+.guide-content p {
+    margin-bottom: 10px;
+    line-height: 1.8;
+}
+
+.guide-step ul,
+.guide-content ul {
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+.guide-step li,
+.guide-content li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
 footer {
     text-align: center;
     padding: 40px 0 20px;
     margin-top: 60px;
     border-top: 2px solid #000000;
     color: #333333;
+}
+
+.footer-nav {
+    margin-bottom: 20px;
+}
+
+.footer-nav a {
+    color: #000000;
+    text-decoration: none;
+    padding: 5px 15px;
+    margin: 0 5px;
+    border-bottom: 1px solid #000000;
+    display: inline-block;
+}
+
+.content-section {
+    padding: 20px 0;
+}
+
+.content-section h2 {
+    font-size: 1.8rem;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #000000;
+}
+
+.content-section h2:first-child {
+    margin-top: 0;
+}
+
+.content-section h3 {
+    font-size: 1.3rem;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.content-section p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.content-section ul {
+    margin-left: 30px;
+    margin-bottom: 15px;
+}
+
+.content-section li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.content-section a {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.faq-item {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-item h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    border-bottom: none;
+}
+
+.contact-method {
+    margin-bottom: 35px;
+    padding: 20px;
+    border: 1px solid #000000;
+    background-color: #fafafa;
+}
+
+.contact-note {
+    margin-top: 40px;
+    padding: 20px;
+    border: 2px solid #000000;
+    background-color: #f5f5f5;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -126,5 +307,10 @@ footer {
 
     .output-section {
         grid-template-columns: 1fr;
+    }
+
+    .main-nav a {
+        display: block;
+        margin: 5px 0;
     }
 }
