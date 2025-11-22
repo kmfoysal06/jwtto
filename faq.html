@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - JWT Decoder</title>
+    <meta name="description" content="Frequently asked questions about JWT Decoder, JWT tokens, signature verification, and security best practices.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Frequently Asked Questions</h1>
+            <p>Common questions about JWT Decoder</p>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="content-section">
+                <div class="faq-item">
+                    <h2>What is a JWT?</h2>
+                    <p>JWT (JSON Web Token) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. It's commonly used for authentication and information exchange in web applications.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Is it safe to decode my JWT tokens here?</h2>
+                    <p>Yes! All decoding happens entirely in your browser using JavaScript. No data is sent to our servers or any third-party services. Your tokens remain completely private and secure on your device.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>How does signature verification work?</h2>
+                    <p>When you provide a secret key, our tool uses the Web Crypto API to verify the JWT signature. It recreates the signature using the header and payload, then compares it with the signature in your token. If they match, the signature is valid.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>What algorithms are supported for signature verification?</h2>
+                    <p>Currently, we support HMAC algorithms: HS256 (SHA-256), HS384 (SHA-384), and HS512 (SHA-512). Support for RSA (RS256, RS384, RS512) and ECDSA (ES256, ES384, ES512) algorithms is coming in future updates.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Why can't I verify RS256 or other RSA signatures?</h2>
+                    <p>RSA signature verification requires the public key in a specific format. We're working on adding support for RSA and ECDSA algorithms. For now, you can use other tools or libraries for these algorithms.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>What does "Invalid Signature" mean?</h2>
+                    <p>An invalid signature means one of the following:</p>
+                    <ul>
+                        <li>The secret key you entered is incorrect</li>
+                        <li>The token has been tampered with or modified</li>
+                        <li>The header or payload has changed since the token was signed</li>
+                        <li>The token was signed with a different secret key</li>
+                    </ul>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Do I need to provide a secret key?</h2>
+                    <p>No, the secret key is optional. You can decode and view the header and payload of any JWT without a secret key. The secret key is only needed if you want to verify the signature.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>What's the difference between decoding and verifying?</h2>
+                    <p><strong>Decoding</strong> means extracting and displaying the header and payload from a JWT. This doesn't require a secret key and doesn't verify authenticity.</p>
+                    <p><strong>Verifying</strong> means checking if the signature is valid using the secret key. This confirms the token hasn't been tampered with and was signed by someone with the correct secret key.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Can I use this tool for production tokens?</h2>
+                    <p>While our tool is secure (everything runs locally), we recommend caution with production tokens and secret keys. Use this tool primarily for development and debugging. Never share your production secret keys.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Why does my JWT have three parts?</h2>
+                    <p>A JWT consists of three Base64URL-encoded parts separated by dots (.):</p>
+                    <ul>
+                        <li><strong>Header:</strong> Contains metadata (algorithm, token type)</li>
+                        <li><strong>Payload:</strong> Contains the claims (data)</li>
+                        <li><strong>Signature:</strong> Ensures the token hasn't been altered</li>
+                    </ul>
+                    <p>Format: <code>header.payload.signature</code></p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>What information is in the payload?</h2>
+                    <p>The payload contains claims - statements about an entity (typically, the user) and additional data. Common claims include:</p>
+                    <ul>
+                        <li><strong>sub:</strong> Subject (user ID)</li>
+                        <li><strong>iat:</strong> Issued at (timestamp)</li>
+                        <li><strong>exp:</strong> Expiration time (timestamp)</li>
+                        <li><strong>iss:</strong> Issuer</li>
+                        <li><strong>aud:</strong> Audience</li>
+                        <li>Custom claims specific to your application</li>
+                    </ul>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Can JWT tokens be encrypted?</h2>
+                    <p>Standard JWTs are signed but not encrypted - they can be decoded by anyone. For encrypted tokens, use JWE (JSON Web Encryption). Our tool currently supports standard JWTs only.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Why do I see an error message?</h2>
+                    <p>Common error reasons:</p>
+                    <ul>
+                        <li><strong>Invalid JWT format:</strong> The token must have exactly three parts separated by dots</li>
+                        <li><strong>Invalid Base64 encoding:</strong> One or more parts couldn't be decoded</li>
+                        <li><strong>Invalid JSON:</strong> The header or payload isn't valid JSON</li>
+                    </ul>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Is this tool open source?</h2>
+                    <p>Yes! This is an open-source project. You can review the code, contribute improvements, or report issues through our repository.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Does this tool work offline?</h2>
+                    <p>Once the page is loaded, the tool works completely offline since all processing happens in your browser. You can even save the HTML file and use it locally without an internet connection.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>Can I integrate this into my application?</h2>
+                    <p>Yes! Since this is open source, you can integrate the code into your own applications. The JWT decoding logic is pure JavaScript and can be easily adapted.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <p>Simple JWT Decoder - Decodes JWT tokens locally in your browser</p>
+        </footer>
+    </div>
+</body>
+</html>
