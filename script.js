@@ -66,10 +66,7 @@ async function verifySignature(token, secret) {
 
         // Convert signature to base64url
         const signatureArray = new Uint8Array(signature);
-        let binary = '';
-        for (let i = 0; i < signatureArray.length; i++) {
-            binary += String.fromCharCode(signatureArray[i]);
-        }
+        const binary = Array.from(signatureArray, byte => String.fromCharCode(byte)).join('');
         const base64 = btoa(binary);
         const base64url = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 
