@@ -40,12 +40,27 @@
 
                 <div class="faq-item">
                     <h2>What algorithms are supported for signature verification?</h2>
-                    <p>Currently, we support HMAC algorithms: HS256 (SHA-256), HS384 (SHA-384), and HS512 (SHA-512). Support for RSA (RS256, RS384, RS512) and ECDSA (ES256, ES384, ES512) algorithms is coming in future updates.</p>
+                    <p>We currently support:</p>
+                    <ul>
+                        <li><strong>HMAC algorithms:</strong> HS256 (SHA-256), HS384 (SHA-384), and HS512 (SHA-512)</li>
+                        <li><strong>ECDSA algorithms:</strong> ES256 (SHA-256 with P-256 curve), ES384 (SHA-384 with P-384 curve), and ES512 (SHA-512 with P-521 curve)</li>
+                    </ul>
+                    <p>Support for RSA (RS256, RS384, RS512) algorithms is coming in future updates.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h2>How do I verify ECDSA (ES256, ES384, ES512) signatures?</h2>
+                    <p>To verify ECDSA signatures, you need the public key. Enter the public key in one of these formats:</p>
+                    <ul>
+                        <li><strong>PEM format:</strong> Standard PEM-encoded public key starting with "-----BEGIN PUBLIC KEY-----"</li>
+                        <li><strong>JWK format:</strong> JSON Web Key as a JSON object with kty, crv, x, and y parameters</li>
+                    </ul>
+                    <p>Example JWK format: <code>{"kty":"EC","crv":"P-256","x":"...","y":"..."}</code></p>
                 </div>
 
                 <div class="faq-item">
                     <h2>Why can't I verify RS256 or other RSA signatures?</h2>
-                    <p>RSA signature verification requires the public key in a specific format. We're working on adding support for RSA and ECDSA algorithms. For now, you can use other tools or libraries for these algorithms.</p>
+                    <p>RSA signature verification requires the public key in a specific format. We're working on adding support for RSA algorithms. For now, you can use other tools or libraries for RSA verification.</p>
                 </div>
 
                 <div class="faq-item">

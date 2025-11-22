@@ -33,12 +33,12 @@
             </div>
 
             <div class="input-section">
-                <label for="secret-input">Secret Key (Optional - for signature verification)</label>
-                <input 
-                    type="text"
+                <label for="secret-input">Secret/Public Key (Optional - for signature verification)</label>
+                <textarea 
                     id="secret-input" 
-                    placeholder="Enter secret key to verify signature..."
-                />
+                    placeholder="Enter secret key (for HMAC) or public key in PEM/JWK format (for ECDSA) to verify signature..."
+                    rows="4"
+                ></textarea>
             </div>
 
             <div class="output-section">
@@ -83,13 +83,18 @@
 
                 <div class="guide-step">
                     <h3>Step 3: Verify Signature (Optional)</h3>
-                    <p>To verify if your JWT signature is valid, enter the secret key in the "Secret Key" field. The decoder will:</p>
+                    <p>To verify if your JWT signature is valid, enter the key in the "Secret/Public Key" field:</p>
+                    <ul>
+                        <li>For <strong>HMAC</strong> (HS256, HS384, HS512): Enter the secret key as plain text</li>
+                        <li>For <strong>ECDSA</strong> (ES256, ES384, ES512): Enter the public key in PEM format or JWK JSON format</li>
+                    </ul>
+                    <p>The decoder will:</p>
                     <ul>
                         <li>Show a <strong>green "Valid Signature"</strong> message if the signature matches</li>
                         <li>Show a <strong>red "Invalid Signature"</strong> message with reason if the signature doesn't match</li>
                         <li>Show an info message if the algorithm is not supported for verification</li>
                     </ul>
-                    <p><em>Note: Currently supports HMAC algorithms (HS256, HS384, HS512). RSA and ECDSA verification coming soon.</em></p>
+                    <p><em>Note: Currently supports HMAC (HS256, HS384, HS512) and ECDSA (ES256, ES384, ES512) algorithms. RSA verification coming soon.</em></p>
                 </div>
 
                 <div class="guide-step">
