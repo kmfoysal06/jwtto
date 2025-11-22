@@ -125,9 +125,22 @@ async function verifySignature(token, secret) {
                 // Try to parse as JWK format
                 try {
                     const jwk = JSON.parse(secret);
-                    // Ensure required JWK parameters are present
+                    // Ensure required JWK parameters are present and validate key type
                     if (!jwk.kty || !jwk.crv || !jwk.x || !jwk.y) {
                         return { valid: false, reason: 'Invalid JWK format. Must contain kty, crv, x, and y parameters.' };
+                    }
+                    if (jwk.kty !== 'EC') {
+                        return { valid: false, reason: 'Invalid JWK key type. Expected "EC" for ECDSA keys.' };
+                    }
+                    // Validate curve compatibility with algorithm
+                    const expectedCurves = {
+                        'ES256': 'P-256',
+                        'ES384': 'P-384',
+                        'ES512': 'P-521'
+                    };
+                    const expectedCurve = expectedCurves[algorithm];
+                    if (jwk.crv !== expectedCurve) {
+                        return { valid: false, reason: `Invalid JWK curve. Expected "${expectedCurve}" for ${algorithm}, but got "${jwk.crv}".` };
                     }
                     publicKey = await crypto.subtle.importKey(
                         'jwk',
@@ -143,7 +156,8 @@ async function verifySignature(token, secret) {
 
             // Decode the signature from base64url
             const signatureB64 = parts[2].replace(/-/g, '+').replace(/_/g, '/');
-            const paddedSignature = signatureB64 + '==='.slice((signatureB64.length + 3) % 4);
+            const paddingLength = (4 - (signatureB64.length % 4)) % 4;
+            const paddedSignature = signatureB64 + '='.repeat(paddingLength);
             const signatureBinary = atob(paddedSignature);
             const signatureBytes = new Uint8Array(signatureBinary.length);
             for (let i = 0; i < signatureBinary.length; i++) {
